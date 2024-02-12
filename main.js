@@ -93,8 +93,33 @@ class ProductManager {
             return;
         }
 
+        // Old product
+        let product = products[index]
+
         // Update product information
-        products[index] = { id, ...updatedProduct };
+        if (updatedProduct.title !== undefined) {
+            product.title = updatedProduct.title;
+        }
+
+        if (updatedProduct.description !== undefined) {
+            product.description = updatedProduct.description;
+        }
+
+        if (updatedProduct.price !== undefined) {
+            product.price = updatedProduct.price;
+        }
+
+        if (updatedProduct.thumbnail !== undefined) {
+            product.thumbnail = updatedProduct.thumbnail;
+        }
+
+        if (updatedProduct.code !== undefined) {
+            product.code = updatedProduct.code;
+        }
+
+        if (updatedProduct.stock !== undefined) {
+            product.stock = updatedProduct.stock;
+        }
 
         this.writeProductsToDB(products);
         console.log(`Product with ID ${id} has been updated`);
@@ -122,6 +147,7 @@ let manager = new ProductManager();
 console.log(manager.getProducts());
 manager.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
 console.log(manager.getProducts());
+manager.updateProduct(1, {"description":"Esta es una descripcion nueva"})
 manager.deleteProductById(1);
 
 
